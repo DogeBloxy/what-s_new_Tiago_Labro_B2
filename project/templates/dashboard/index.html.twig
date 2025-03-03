@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello DashboardController!{% endblock %}
+
+{% block body %}
+<div class="container my-4">
+<h1>Les emplois du temps publiés :</h1>
+
+<ul>
+{% for timetable in timetables %}
+<li>
+    <img src="{{ vich_uploader_asset(timetable, 'thumbnail') }}" alt="" style="width: 30%;">
+    {{ timetable.title }}
+</li>
+{% endfor %}
+</ul>
+</div>
+{% endblock %}
