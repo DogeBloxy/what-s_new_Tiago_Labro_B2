@@ -1,38 +1,85 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!
-{% endblock %}
+{% block title %}Hello HomeController!{% endblock %}
 
 {% block body %}
-
-	<div class="grid">
-		<div class="col news">
-			{% for item in rss|slice(0,1) %}
-				<img class="img-news" src="{{ item.enclosureUrl }}" alt="image article">
-				<br>
-				<h5>{{ item.title }}</h5>
-				<small class="text-body-secondary">{{ item.pubDate|format_datetime('medium', 'none', locale: 'fr') }}</small>
-				<p>{{ item.description }}</p>
-			</div>
-		{% endfor %}
-		<div class="col image-col timetable">
-			{% for timetable in timetables|slice(0,1) %}
-				<img src="{{ vich_uploader_asset(timetable, 'thumbnail') }}" alt="">
-			{% endfor %}
-		</div>
-		<div class="col instagram">
-			{% for item in instagram|slice(0,1) %}
-				{# <img class="img-news" src="{{ item.enclosureUrl }}" alt="image article"> #}
-				<h5>{{ item.title }}</h5>
-				<small class="text-body-secondary">{{ item.pubDate|format_datetime('medium', 'none', locale: 'fr') }}</small>
-				<p>{{ item.description }}</p>
-			{% endfor %}
-		</div>
-		<div class="col funfact">
-			{% for item in funfact|slice(0,1) %}
-				<h5>{{ item.title }}</h5>
-				<p>{{ item.description }}</p>
-			{% endfor %}
-		</div>
-	</div>
+<div class="index">
+    <div class="grid">
+        <section class="splide column news" id="carousel">
+            <div class="splide__track">
+                <ul class="splide__list">
+                    {% for item in rss|slice(0,3) %}
+                    <li class="splide__slide">
+                        <img class="img-news" src="{{ item.enclosureUrl }}" alt="image article">
+                        <br>
+                        <h5>{{ item.title }}</h5>
+                        <small class="date">{{ item.pubDate|format_datetime('medium', 'none', locale: 'fr') }} -
+                            Amiens</small>
+                        <p>{{ item.description }}</p>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </section>
+        <section class="splide column timetable" id="timetable-carousel">
+            <div class="splide__track">
+                <ul class="splide__list">
+                    {% for timetable in timetables %}
+                    <li class="splide__slide">
+                        <div class="card">
+                            <h5 class="card-header">{{ timetable.dayTimetable|format_datetime('full', 'none', locale:
+                                'fr')|capitalize }}</h5>
+                            <div class="card-body">
+                                <h5 class="card-title">{{ timetable.title }}</h5>
+                                <div class="text-timetable">
+                                    <div class="hours">
+                                        <p class="hour">9h00 - 12h00</p>
+                                        <div class="description">
+                                            <p class="card-text professor">{{ timetable.professorMorning }}</p>
+                                            <p class="card-text subject">{{ timetable.subjectMorning }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="hours">
+                                        <p class="hour">13h00 - 16h00</p>
+                                        <div class="description">
+                                            <p class="card-text professor">{{ timetable.professorAfternoon }}</p>
+                                            <p class="card-text subject">{{ timetable.subjectAfternoon }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </section>
+        <section class="splide column instagram" id="instagram-carousel">
+            <div class="splide__track">
+                <ul class="splide__list">
+                    {% for item in instagram|slice(0,3) %}
+                    <li class="splide__slide">
+                        <h5>{{ item.title }}</h5>
+                        <small class="date">{{ item.pubDate|format_datetime('medium', 'none', locale: 'fr') }} -
+                            Instagram</small>
+                        <p>{{ item.description }}</p>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </section>
+        <section class="splide column funfact" id="funfacts-carousel">
+            <div class="splide__track">
+                <ul class="splide__list">
+                    {% for item in funfact %}
+                    <li class="splide__slide">
+                        <h5>{{ item.title }}</h5>
+                        <p>{{ item.description }}</p>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </section>
+    </div>
+</div>
 {% endblock %}

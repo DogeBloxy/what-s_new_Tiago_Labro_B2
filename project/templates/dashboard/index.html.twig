@@ -4,15 +4,39 @@
 
 {% block body %}
 <div class="container my-4">
-<h1>Les emplois du temps publiés :</h1>
+    <h1>Les emplois du temps publiés :</h1>
 
-<ul>
-{% for timetable in timetables %}
-<li>
-    <img src="{{ vich_uploader_asset(timetable, 'thumbnail') }}" alt="" style="width: 30%;">
-    {{ timetable.title }}
-</li>
-{% endfor %}
-</ul>
+    <a class="btn btn-primary" href="{{ path('app_add_timetable')}}">Ajouter un emploi du temps</a>
+
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+
+        {% for timetable in timetables %}
+        <div class="col">
+            <div class="card dashboard">
+                <div class="card-body">
+                    <h5 class="card-title">{{ timetable.title }}</h5>
+                    <p class="card-text">Pour le {{ timetable.dayTimetable|format_datetime('full', 'none', locale:
+                        'fr')|capitalize
+                        }}</p>
+                </div>
+                <h5 class="card-title">Pour le matin :</h5>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">{{ timetable.subjectMorning }}</li>
+                    <li class="list-group-item">{{ timetable.professorMorning }}</li>
+                </ul>
+                <h5 class="card-title">Pour l'après-midi :</h5>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">{{ timetable.subjectAfternoon }}</li>
+                    <li class="list-group-item">{{ timetable.professorAfternoon }}</li>
+                </ul>
+                <div class="card-body">
+                    <a class="btn btn-primary" href="{{ path('app_edit_timetable', {id: timetable.id}) }}">Modifer</a>
+                    <a class="btn btn-danger"
+                        href="{{ path('app_delete_timetable', {id: timetable.id}) }}">Supprimer</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
 </div>
 {% endblock %}

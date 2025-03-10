@@ -46,4 +46,32 @@ final class DashboardController extends AbstractController
             'TimetableForm' => $form->createView(),
         ]);
     }
+
+    #[IsGranted("ROLE_USER")]
+    #[Route('/dashboard/{id}/edit', name: 'app_edit_timetable', requirements: ['id' => '\d+'])]
+    public function editTimetable(Timetable $timetable, Request $request, EntityManagerInterface $entity_manager): Response
+    {
+        $form = $this->createForm(TimetableFormType::class, $timetable);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entity_manager->persist($timetable);
+            $entity_manager->flush();
+            $this->addFlash('success', 'L\'emploi du temps a été modifié !');
+            return $this->redirectToRoute('app_dashboard');
+        }
+        return $this->render('dashboard/edit_timetable.html.twig', [
+            'TimetableForm' => $form->createView(),
+            'timetable' => $timetable,
+        ]);
+    }
+
+    #[IsGranted("ROLE_USER")]
+    #[Route('/dashboard/{id}/delete', name: 'app_delete_timetable', requirements: ['id' => '\d+'])]
+    public function deleteTimetable(Timetable $timetable, Request $request, EntityManagerInterface $entity_manager): Response
+    {
+        $entity_manager->remove($timetable);
+        $entity_manager->flush();
+        $this->addFlash('success', "L'emploi du temps a été supprimé !");
+        return $this->redirectToRoute('app_dashboard');
+    }
 }

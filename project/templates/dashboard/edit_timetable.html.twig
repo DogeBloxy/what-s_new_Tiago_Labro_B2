@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Ajouter un emploi du temps{% endblock %}
+{% block title %}Modifier un emploi du temps{% endblock %}
 
 {% block body %}
 <div class="container my-4">
 
-    <h1>Ajouter un emploi du temps</h1>
+    <h1>Modifier un emploi du temps</h1>
 
     {{ form_start(TimetableForm) }}
     
@@ -16,7 +16,8 @@
         {{ form_row(TimetableForm.subject_afternoon) }}
         {{ form_row(TimetableForm.professor_afternoon) }}
         {{ form_rest(TimetableForm) }}
-    <button type="submit" class="btn btn-lg btn-primary">Ajouter mon emploi du temps</button>
+    <button type="submit" class="btn btn-lg btn-primary">Modifer mon emploi du temps</button>
+
 
     {{ form_end(TimetableForm) }}
 

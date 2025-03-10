@@ -1,11 +1,14 @@
 body {
-    background-color: skyblue;
     margin: 0;
     padding: 0;
+}
+
+.index {
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    color: #3C3C8C;
 }
 
 .grid {
@@ -16,7 +19,7 @@ body {
     height: 100vh;
 }
 
-.col {
+.column {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -30,25 +33,81 @@ body {
     box-sizing: border-box;
 }
 
+.date {
+    color: #515188;
+}
+
 .img-news {
     width: 50%;
     height: auto;
     border-radius: 10px;
 }
 
-.image-col img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-}
-
 .news {
     background-color: #6FDECF;
+}
+
+.card {
+    width: 500px; 
+    height: 250px;
+    color: #3C3C8C;
+}
+
+.card-header {
+    background-color: #D0FBFB;
+    text-align: center;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.text-timetable {
+    display: flex;
+    background-color: #ABE6FD;
+    justify-content: space-around;
+}
+
+.hours {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.hour {
+    font-size: 30px;
+    background-color: #3C3C8C;
+    color: white;
+    width: 233px;
+    text-align: center;
+}
+
+.description {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    color: black;
+    padding-bottom: 10px;
+}
+
+.professor {
+    margin-bottom: 0;
+    font-size: 20px;
 }
 
 .timetable {
     background-color: #D7BEFF;
     padding: 0px;
+    display: flex;
+    flex-direction: column;
+}
+
+.timetable, .news {
+    height: 650px;
 }
 
 .instagram {
@@ -58,3 +117,16 @@ body {
 .funfact {
     background-color: #6FD5FD;
 }
+
+.dashboard {
+    height: auto;
+}
+
+.splide__slide {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 50%;
+}
+

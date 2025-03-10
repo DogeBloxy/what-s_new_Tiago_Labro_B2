@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\TimetableRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
@@ -19,14 +20,20 @@ class Timetable
     #[ORM\Column(length: 255)]
     private ?string $title = null;
 
-    #[Vich\UploadableField(mapping: 'timetable', fileNameProperty: 'thumbnailName')]
-    private ?File $thumbnail = null;
+    #[ORM\Column(length: 255)]
+    private ?string $subject_morning = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $thumbnailName = null;
+    private ?string $professor_morning = null;
 
-    #[ORM\Column(nullable: true)]
-    private ?\DateTimeImmutable $updatedAt = null;
+    #[ORM\Column(length: 255)]
+    private ?string $subject_afternoon = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $professor_afternoon = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $day_timetable = null;
 
     public function getId(): ?int
     {
@@ -45,42 +52,62 @@ class Timetable
         return $this;
     }
 
-    public function getThumbnail(): ?File
+    public function getSubjectMorning(): ?string
     {
-        return $this->thumbnail;
+        return $this->subject_morning;
     }
 
-    public function setThumbnail(?File $thumbnail=null): void
+    public function setSubjectMorning(string $subject_morning): static
     {
-        $this->thumbnail = $thumbnail;
-
-        if (null !== $thumbnail) {
-            // It is required that at least one field changes if you are using doctrine
-            // otherwise the event listeners won't be called and the file is lost
-            $this->updatedAt = new \DateTimeImmutable();
-        }
-    }
-
-    public function getThumbnailName(): ?string
-    {
-        return $this->thumbnailName;
-    }
-
-    public function setThumbnailName(string $thumbnailName): static
-    {
-        $this->thumbnailName = $thumbnailName;
+        $this->subject_morning = $subject_morning;
 
         return $this;
     }
 
-    public function getUpdatedAt(): ?\DateTimeImmutable
+    public function getProfessorMorning(): ?string
     {
-        return $this->updatedAt;
+        return $this->professor_morning;
     }
 
-    public function setUpdatedAt(\DateTimeImmutable $updatedAt): static
+    public function setProfessorMorning(string $professor_morning): static
     {
-        $this->updatedAt = $updatedAt;
+        $this->professor_morning = $professor_morning;
+
+        return $this;
+    }
+
+    public function getSubjectAfternoon(): ?string
+    {
+        return $this->subject_afternoon;
+    }
+
+    public function setSubjectAfternoon(string $subject_afternoon): static
+    {
+        $this->subject_afternoon = $subject_afternoon;
+
+        return $this;
+    }
+
+    public function getProfessorAfternoon(): ?string
+    {
+        return $this->professor_afternoon;
+    }
+
+    public function setProfessorAfternoon(string $professor_afternoon): static
+    {
+        $this->professor_afternoon = $professor_afternoon;
+
+        return $this;
+    }
+
+    public function getDayTimetable(): ?\DateTimeInterface
+    {
+        return $this->day_timetable;
+    }
+
+    public function setDayTimetable(\DateTimeInterface $day_timetable): static
+    {
+        $this->day_timetable = $day_timetable;
 
         return $this;
     }

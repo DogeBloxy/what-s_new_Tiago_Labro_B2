@@ -5,8 +5,7 @@ namespace App\Form;
 use App\Entity\Timetable;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -25,8 +24,13 @@ class TimetableFormType extends AbstractType
     {
         $builder
             ->add('title', TextType::class)
-            ->add('thumbnail', FileType::class)
-            ->add('submit', SubmitType::class)
+            ->add('day_timetable', DateType::class, [
+                'widget' => 'single_text',
+            ])
+            ->add('subject_morning', TextType::class)
+            ->add('professor_morning', TextType::class)
+            ->add('subject_afternoon', TextType::class)
+            ->add('professor_afternoon', TextType::class)
         ;
     }
 
@@ -34,6 +38,9 @@ class TimetableFormType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Timetable::class,
+            'csrf_protection' => true,
+            'csrf_field_name' => '_token',
+            'csrf_token_id'   => 'timetable_item',
         ]);
     }
 }
