@@ -23,14 +23,49 @@ class TimetableFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('title', TextType::class)
-            ->add('day_timetable', DateType::class, [
-                'widget' => 'single_text',
-            ])
-            ->add('subject_morning', TextType::class)
-            ->add('professor_morning', TextType::class)
-            ->add('subject_afternoon', TextType::class)
-            ->add('professor_afternoon', TextType::class)
+            ->add(
+                'title',
+                TextType::class,
+                [
+                    'label' => 'Titre',
+                ]
+            )
+            ->add(
+                'day_timetable',
+                DateType::class,
+                [
+                    'label' => 'Date',
+                    'widget' => 'single_text',
+                ]
+            )
+            ->add(
+                'subject_morning',
+                TextType::class,
+                [
+                    'label' => 'Matière du matin',
+                ]
+            )
+            ->add(
+                'professor_morning',
+                TextType::class,
+                [
+                    'label' => 'Professeur du matin',
+                ]
+            )
+            ->add(
+                'subject_afternoon',
+                TextType::class,
+                [
+                    'label' => 'Matière de l\'après-midi',
+                ]
+            )
+            ->add(
+                'professor_afternoon',
+                TextType::class,
+                [
+                    'label' => 'Professeur de l\'après-midi',
+                ]
+            )
         ;
     }
 
