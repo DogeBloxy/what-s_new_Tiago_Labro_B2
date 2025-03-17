@@ -32,15 +32,7 @@ final class HomeController extends AbstractController
 
         $agefi = simplexml_load_file('https://www.agefi.fr/theme/ia.rss');
         $agefiResult = $agefi->xpath('channel/item');
-
-        // foreach ($agefiResult as $item) {
-        //     $enclosure = $item->enclosure;
-        //     if ($enclosure) {
-        //         $item->enclosureUrl = (string) $enclosure['url'];
-        //     } else {
-        //         $item->enclosureUrl = null;
-        //     }
-        // }
+        
 
         $funfact = simplexml_load_file(__DIR__. '/../../assets/xml/funfact.xml');
 
