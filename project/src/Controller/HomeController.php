@@ -30,10 +30,10 @@ final class HomeController extends AbstractController
 
         $timetables = $repository->findAll();
 
-        $instagram = simplexml_load_file('https://rss.app/feeds/2Y3ixwJPbkuqKG9L.xml');
-        $instagramResult = $instagram->xpath('channel/item');
+        $agefi = simplexml_load_file('https://www.agefi.fr/theme/ia.rss');
+        $agefiResult = $agefi->xpath('channel/item');
 
-        // foreach ($instagramResult as $item) {
+        // foreach ($agefiResult as $item) {
         //     $enclosure = $item->enclosure;
         //     if ($enclosure) {
         //         $item->enclosureUrl = (string) $enclosure['url'];
@@ -47,7 +47,7 @@ final class HomeController extends AbstractController
         return $this->render('home/index.html.twig', [
             'rss' => $result,
             'timetables' => $timetables,
-            'instagram' => $instagramResult,
+            'agefi' => $agefiResult,
             'funfact' => $funfact,
         ]);
     }

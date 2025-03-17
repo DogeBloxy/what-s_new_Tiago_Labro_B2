@@ -8,7 +8,7 @@
         <section class="splide column news" id="carousel">
             <div class="splide__track">
                 <ul class="splide__list">
-                    {% for item in rss|slice(0,3) %}
+                    {% for item in rss|slice(0,5) %}
                     <li class="splide__slide">
                         <img class="img-news" src="{{ item.enclosureUrl }}" alt="image article">
                         <br>
@@ -54,14 +54,14 @@
                 </ul>
             </div>
         </section>
-        <section class="splide column instagram" id="instagram-carousel">
+        <section class="splide column agefi" id="agefi-carousel">
             <div class="splide__track">
                 <ul class="splide__list">
-                    {% for item in instagram|slice(0,3) %}
+                    {% for item in agefi|slice(0,5) %}
                     <li class="splide__slide">
                         <h5>{{ item.title }}</h5>
                         <small class="date">{{ item.pubDate|format_datetime('medium', 'none', locale: 'fr') }} -
-                            Instagram</small>
+                            Agefi</small>
                         <p>{{ item.description }}</p>
                     </li>
                     {% endfor %}
@@ -74,6 +74,7 @@
                     {% for item in funfact %}
                     <li class="splide__slide">
                         <h5>{{ item.title }}</h5>
+                        <small class="funfact-small">Les Funfacts</small>
                         <p>{{ item.description }}</p>
                     </li>
                     {% endfor %}
